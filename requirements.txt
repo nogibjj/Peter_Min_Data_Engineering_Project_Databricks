@@ -6,3 +6,7 @@ pylint==2.15.3
 boto3==1.24.87
 requests
 ruff
+
+# Databricks connection & environment variables handling
+databricks-sql-connector
+python-dotenv

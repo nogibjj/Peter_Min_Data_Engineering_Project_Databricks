@@ -14,7 +14,7 @@ The purpose of this project is to learn about and build an ETL-Query pipeline ba
 The dataset comes from FiveThirtyEight, an election polls, politics, and analysis website now acquired by ABC news. It contains a CSV file of detailed employment information regarding graduate students from different majors. Original data source is American Community Survey 2010-2012 Public Use Microdata Series. Link: https://github.com/fivethirtyeight/data/tree/master/college-majors
 
 ## Referenced SQL Query
-The complex SQL query I created aims to examine what academic majors that have more employed graduates than computer science and less unemployed graduates than computer science. Here is the query used:
+The complex SQL query I created aims to examine academic majors that have more employed graduates than computer science and less unemployed graduates than computer science. Here is the query used:
 ```
 SELECT db1.major, db1.major_category, db2.major, db2.major_category, 
 db1.grad_employed AS cs_employed, db2.grad_employed AS other_employed,
@@ -25,3 +25,4 @@ WHERE db1.major = 'COMPUTER SCIENCE'
 AND db2.grad_employed >= db1.grad_employed
 AND db2.grad_unemployed < db1.grad_unemployed;
 ```
+By using a cross join and filtering first database with computer science majors, this query checks the values of `grad_employed` and `grad_unemployed` for all other graduates against CS major that also possess the conditions mentioned above.

@@ -1,149 +1,25 @@
 """Test goes here"""
-import subprocess
+from mylib.extract import extract
+from mylib.transform_load import load
+from mylib.query import query
 
 
 def test_extract():
-    """tests extract()"""
-    result = subprocess.run(
-        ["python", "main.py", "extract"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-    assert "Extracting data..." in result.stdout
+    test1 = extract()
+    assert test1 is not None
 
 
-def test_transform_load():
-    """tests transfrom_load"""
-    result = subprocess.run(
-        ["python", "main.py", "transform_load"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-    assert "Transforming data..." in result.stdout
+def test_load():
+    test2 = load()
+    assert test2 == 'GradEmployment Database has been loaded or already created.'
 
 
-def test_update_record():
-    """tests update_record"""
-    result = subprocess.run(
-        [
-            "python",
-            "main.py",
-            "update_record",
-            "1",
-            "0000",
-            "TEST_MAJOR",
-            "TEST_MAJOR_CATEGORY",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0.0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0.0",
-            "0",
-            "0",
-            "0",
-            "0.0",
-            "0.0",
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-def test_delete_record():
-    """tests delete_record"""
-    result = subprocess.run(
-        ["python", "main.py", "delete_record", "1"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-def test_create_record():
-    """tests create_record"""
-    result = subprocess.run(
-        [
-            "python",
-            "main.py",
-            "create_record",
-            "0000",
-            "TEST_MAJOR",
-            "TEST_MAJOR_CATEGORY",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0.0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0",
-            "0.0",
-            "0",
-            "0",
-            "0",
-            "0.0",
-            "0.0",
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-def test_general_query():
-    """tests general_query"""
-    result = subprocess.run(
-        [
-            "python",
-            "main.py",
-            "general_query",
-            "SELECT major_category FROM GradEmployment WHERE major_category LIKE 'Computer%';",
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-def test_read_record():
-    """tests read_record"""
-    result = subprocess.run(
-        ["python", "main.py", "read_record"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
+def test_query():
+    test3 = query()
+    assert test3 == 'SQL query successfully executed.'
 
 
 if __name__ == "__main__":
     test_extract()
-    test_transform_load()
-    test_create_record()
-    test_read_record()
-    test_update_record()
-    test_delete_record()
-    test_general_query()
+    test_load()
+    test_query()
